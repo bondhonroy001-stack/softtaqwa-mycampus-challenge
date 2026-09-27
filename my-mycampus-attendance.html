@@ -100,6 +100,15 @@
 
   .ring svg { transform: rotate(-90deg); }
 
+  @keyframes ringFillAttendance {
+    from { stroke-dashoffset: 283; }
+    to { stroke-dashoffset: 22.5; }
+  }
+
+  .ring svg circle.progress {
+    animation: ringFillAttendance 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+  }
+
   .ring .ring-label {
     position: absolute;
     inset: 0;
@@ -230,6 +239,8 @@
     height: 100%;
     border-radius: 999px;
     background: var(--color-accent);
+    width: 0%;
+    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .bar-fill.warn { background: var(--color-warn); }
@@ -316,8 +327,8 @@
       <div class="ring">
         <svg width="106" height="106" viewBox="0 0 106 106">
           <circle cx="53" cy="53" r="45" fill="none" stroke="#EDF0EA" stroke-width="11"/>
-          <circle cx="53" cy="53" r="45" fill="none" stroke="#8FE000" stroke-width="11"
-            stroke-dasharray="283" stroke-dashoffset="22.5" stroke-linecap="round"/>
+          <circle class="progress" cx="53" cy="53" r="45" fill="none" stroke="#8FE000" stroke-width="11"
+            stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round"/>
         </svg>
         <div class="ring-label">
           <div class="pct">92%</div>
@@ -347,7 +358,7 @@
           <span class="name">Data Structures</span>
           <span class="pct good">96%</span>
         </div>
-        <div class="bar-track"><div class="bar-fill" style="width: 96%;"></div></div>
+        <div class="bar-track"><div class="bar-fill" data-width="96"></div></div>
         <div class="row1" style="margin: 8px 0 0;">
           <span class="count">24 of 25 classes attended</span>
         </div>
@@ -358,7 +369,7 @@
           <span class="name">Database Lab</span>
           <span class="pct good">90%</span>
         </div>
-        <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+        <div class="bar-track"><div class="bar-fill" data-width="90"></div></div>
         <div class="row1" style="margin: 8px 0 0;">
           <span class="count">18 of 20 classes attended</span>
         </div>
@@ -369,7 +380,7 @@
           <span class="name">Software Engineering</span>
           <span class="pct good">94%</span>
         </div>
-        <div class="bar-track"><div class="bar-fill" style="width: 94%;"></div></div>
+        <div class="bar-track"><div class="bar-fill" data-width="94"></div></div>
         <div class="row1" style="margin: 8px 0 0;">
           <span class="count">17 of 18 classes attended</span>
         </div>
@@ -380,7 +391,7 @@
           <span class="name">Computer Networks</span>
           <span class="pct warn">71%</span>
         </div>
-        <div class="bar-track"><div class="bar-fill warn" style="width: 71%;"></div></div>
+        <div class="bar-track"><div class="bar-fill warn" data-width="71"></div></div>
         <div class="row1" style="margin: 8px 0 0;">
           <span class="count">15 of 21 classes attended</span>
         </div>
@@ -413,6 +424,19 @@
   </nav>
 
 </div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    var bars = document.querySelectorAll('.bar-fill');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        bars.forEach(function (bar) {
+          bar.style.width = bar.getAttribute('data-width') + '%';
+        });
+      });
+    });
+  });
+</script>
 
 </body>
 </html>

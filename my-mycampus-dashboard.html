@@ -184,6 +184,15 @@
 
   .hero-ring svg { transform: rotate(-90deg); }
 
+  @keyframes ringFillHero {
+    from { stroke-dashoffset: 308; }
+    to { stroke-dashoffset: 25; }
+  }
+
+  .hero-ring svg circle.progress {
+    animation: ringFillHero 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+  }
+
   .hero-ring .ring-label {
     position: absolute;
     inset: 0;
@@ -227,11 +236,12 @@
     gap: 5px;
     background: var(--color-dark);
     color: #fff;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 700;
-    padding: 9px 14px;
+    padding: 9px 13px;
     border-radius: 999px;
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .hero-cta svg { width: 14px; height: 14px; }
@@ -475,6 +485,7 @@
   }
 
   .t-row.now .t-content .time { color: var(--color-accent-ink); }
+  .t-row.now .t-content .meta { color: #3D5A18; }
 
   .t-content .status {
     font-size: 0.75rem;
@@ -566,8 +577,8 @@
           <div class="hero-ring">
             <svg width="118" height="118" viewBox="0 0 118 118">
               <circle cx="59" cy="59" r="49" fill="none" stroke="rgba(16,23,16,0.14)" stroke-width="13"/>
-              <circle cx="59" cy="59" r="49" fill="none" stroke="#10160F" stroke-width="13"
-                stroke-dasharray="308" stroke-dashoffset="25" stroke-linecap="round"/>
+              <circle class="progress" cx="59" cy="59" r="49" fill="none" stroke="#10160F" stroke-width="13"
+                stroke-dasharray="308" stroke-dashoffset="308" stroke-linecap="round"/>
             </svg>
             <div class="ring-label">
               <span class="pct">92%</span>
@@ -577,7 +588,7 @@
           <div class="hero-detail">
             <p>Above the <strong>75%</strong> requirement in every subject except one. Check the breakdown before it becomes a problem.</p>
             <span class="hero-cta">
-              View full breakdown
+              View breakdown
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
             </span>
           </div>
