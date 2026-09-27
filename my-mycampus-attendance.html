@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyCampus — Attendance</title>
+<style>
+  :root {
+    --color-bg: #F6F9F6;
+    --color-surface: #FFFFFF;
+    --color-text: #10160F;
+    --color-text-muted: #6B756C;
+    --color-border: #E4EAE3;
+    --color-accent: #8FE000;
+    --color-accent-ink: #2C4A00;
+    --color-accent-soft: #EEFCD4;
+    --color-warn: #E0453C;
+    --color-warn-soft: #FDEAE8;
+    --color-warn-ink: #B23127;
+    --chip-blue: #E7F3FF;
+    --chip-blue-ink: #1364C9;
+    --chip-purple: #F3EBFF;
+    --chip-purple-ink: #7A3FE0;
+    --chip-gold: #FFF4E0;
+    --chip-gold-ink: #B8760A;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: var(--font);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .screen {
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--color-bg);
+    padding-bottom: 88px;
+  }
+
+  header.top {
+    padding: 20px 20px 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  header.top .back {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--color-text);
+    flex-shrink: 0;
+  }
+
+  header.top h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .section { padding: 0 20px; margin-bottom: 22px; }
+
+  /* Overall ring card */
+  .overall-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 12px 24px -18px rgba(16,22,15,0.3);
+  }
+
+  .ring {
+    position: relative;
+    width: 108px;
+    height: 108px;
+    flex-shrink: 0;
+  }
+
+  .ring svg { transform: rotate(-90deg); }
+
+  .ring .ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ring .ring-label .pct {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--color-accent-ink);
+  }
+
+  .ring .ring-label .txt {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .overall-info h2 {
+    font-size: 0.95rem;
+    margin: 0 0 6px;
+  }
+
+  .overall-info .req {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin: 0 0 10px;
+  }
+
+  .badge-good {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-ink);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+
+  .section-head h3 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .section-head .filter {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+
+  /* Subject rows */
+  .subject-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .subject-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+  }
+
+  .subject-card .row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .subject-card .name {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .subject-card .count {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .subject-card .pct {
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+
+  .subject-card .pct.good { color: var(--color-accent-ink); }
+  .subject-card .pct.warn { color: var(--color-warn-ink); }
+
+  .bar-track {
+    height: 7px;
+    border-radius: 999px;
+    background: #EEF1ED;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--color-accent);
+  }
+
+  .bar-fill.warn { background: var(--color-warn); }
+
+  .low-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--color-warn-soft);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-top: 6px;
+  }
+
+  .low-alert .emoji { font-size: 1.1rem; }
+
+  .low-alert p {
+    margin: 0;
+    font-size: 0.76rem;
+    color: var(--color-warn-ink);
+    line-height: 1.45;
+  }
+
+  .low-alert strong { font-weight: 700; }
+
+  nav.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 14px;
+  }
+
+  nav.bottom a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  nav.bottom a.active { color: var(--color-accent-ink); }
+
+  nav.bottom .nav-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="screen">
+
+  <header class="top">
+    <a href="my-mycampus-dashboard.html" class="back">←</a>
+    <h1>Attendance</h1>
+  </header>
+
+  <div class="section">
+    <div class="overall-card">
+      <div class="ring">
+        <svg width="108" height="108" viewBox="0 0 108 108">
+          <circle cx="54" cy="54" r="46" fill="none" stroke="#EEF1ED" stroke-width="12"/>
+          <circle cx="54" cy="54" r="46" fill="none" stroke="#8FE000" stroke-width="12"
+            stroke-dasharray="289" stroke-dashoffset="23" stroke-linecap="round"/>
+        </svg>
+        <div class="ring-label">
+          <div class="pct">92%</div>
+          <div class="txt">Overall</div>
+        </div>
+      </div>
+      <div class="overall-info">
+        <h2>You're on track</h2>
+        <p class="req">Minimum required: 75%</p>
+        <span class="badge-good">✓ Above requirement</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h3>Subject-wise</h3>
+      <span class="filter">This Semester</span>
+    </div>
+    <div class="subject-list">
+
+      <div class="subject-card">
+        <div class="row1">
+          <span class="name">Data Structures</span>
+          <span class="pct good">96%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width: 96%;"></div></div>
+        <div class="row1" style="margin: 6px 0 0;">
+          <span class="count">24 of 25 classes attended</span>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="row1">
+          <span class="name">Database Lab</span>
+          <span class="pct good">90%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+        <div class="row1" style="margin: 6px 0 0;">
+          <span class="count">18 of 20 classes attended</span>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="row1">
+          <span class="name">Software Engineering</span>
+          <span class="pct good">94%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width: 94%;"></div></div>
+        <div class="row1" style="margin: 6px 0 0;">
+          <span class="count">17 of 18 classes attended</span>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="row1">
+          <span class="name">Computer Networks</span>
+          <span class="pct warn">71%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill warn" style="width: 71%;"></div></div>
+        <div class="row1" style="margin: 6px 0 0;">
+          <span class="count">15 of 21 classes attended</span>
+        </div>
+        <div class="low-alert">
+          <span class="emoji">⚠️</span>
+          <p><strong>Below the 75% requirement.</strong> Attend the next 3 classes without absence to recover.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="bottom">
+    <a href="my-mycampus-dashboard.html">
+      <div class="nav-icon">🏠</div>
+      Home
+    </a>
+    <a href="#">
+      <div class="nav-icon">💬</div>
+      Messages
+    </a>
+    <a href="my-mycampus-attendance.html" class="active">
+      <div class="nav-icon">✅</div>
+      Attendance
+    </a>
+    <a href="#">
+      <div class="nav-icon">👤</div>
+      Profile
+    </a>
+  </nav>
+
+</div>
+
+</body>
+</html>

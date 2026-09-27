@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyCampus — Home</title>
+<style>
+  :root {
+    --color-bg: #F6F9F6;
+    --color-surface: #FFFFFF;
+    --color-text: #10160F;
+    --color-text-muted: #6B756C;
+    --color-border: #E4EAE3;
+    --color-accent: #8FE000;
+    --color-accent-ink: #2C4A00;
+    --color-accent-soft: #EEFCD4;
+    --chip-blue: #E7F3FF;
+    --chip-blue-ink: #1364C9;
+    --chip-purple: #F3EBFF;
+    --chip-purple-ink: #7A3FE0;
+    --chip-gold: #FFF4E0;
+    --chip-gold-ink: #B8760A;
+    --chip-pink: #FFEAF1;
+    --chip-pink-ink: #C22A6B;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: var(--font);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .screen {
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--color-bg);
+    padding-bottom: 88px;
+    position: relative;
+  }
+
+  header.top {
+    padding: 22px 20px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  header.top .greeting .hello {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0 0 2px;
+  }
+
+  header.top .greeting .name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  header.top .icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  header.top .icon-btn .dot {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #E0453C;
+    border: 2px solid var(--color-bg);
+  }
+
+  .section {
+    padding: 0 20px;
+    margin-bottom: 22px;
+  }
+
+  /* Notice banner */
+  .notice-card {
+    background: linear-gradient(135deg, #1D2B17, #10160F);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .notice-card .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(143, 224, 0, 0.18);
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  .notice-card h2 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    max-width: 85%;
+  }
+
+  .notice-card p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.65);
+    margin: 0 0 14px;
+  }
+
+  .notice-card .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  /* Quick stats row */
+  .stats-row {
+    display: flex;
+    gap: 10px;
+    margin-top: -14px;
+    padding: 0 20px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    flex: 1;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 10px;
+    text-align: center;
+    box-shadow: 0 8px 20px -14px rgba(16, 22, 15, 0.25);
+  }
+
+  .stat-card .value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .stat-card .label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .stat-card.attendance .value { color: var(--color-accent-ink); }
+  .stat-card.assignments .value { color: var(--chip-pink-ink); }
+  .stat-card.gpa .value { color: var(--chip-blue-ink); }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+
+  .section-head h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .section-head a {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* Quick access grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .grid-item .icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .grid-item span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .icon.notices { background: var(--color-accent-soft); }
+  .icon.classes { background: var(--chip-blue); }
+  .icon.attendance { background: var(--chip-purple); }
+  .icon.results { background: var(--chip-gold); }
+  .icon.assignments { background: var(--chip-pink); }
+  .icon.events { background: var(--color-accent-soft); }
+  .icon.profile { background: var(--chip-blue); }
+  .icon.more { background: #F0F1EF; }
+
+  /* Today schedule */
+  .schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .class-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+  }
+
+  .class-row .time {
+    text-align: center;
+    min-width: 46px;
+  }
+
+  .class-row .time .t {
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .class-row .time .ampm {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .class-row .bar {
+    width: 3px;
+    align-self: stretch;
+    border-radius: 3px;
+    background: var(--color-accent);
+  }
+
+  .class-row.alt .bar { background: var(--chip-blue-ink); }
+
+  .class-row .info {
+    flex: 1;
+  }
+
+  .class-row .info .course {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 0 0 2px;
+  }
+
+  .class-row .info .meta {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .class-row .status {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-ink);
+  }
+
+  /* Bottom nav */
+  nav.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 14px;
+  }
+
+  nav.bottom a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  nav.bottom a.active {
+    color: var(--color-accent-ink);
+  }
+
+  nav.bottom .nav-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="screen">
+
+  <header class="top">
+    <div class="greeting">
+      <p class="hello">Good morning,</p>
+      <p class="name">Rafi Ahmed 👋</p>
+    </div>
+    <div class="icon-btn">🔔<span class="dot"></span></div>
+  </header>
+
+  <div class="section" style="margin-bottom: 0;">
+    <div class="notice-card">
+      <span class="tag">📌 New Notice</span>
+      <h2>Mid-term routine has been published for CSE 3rd Year</h2>
+      <p>Posted 2 hours ago by Exam Controller</p>
+      <a href="#" class="cta">Read full notice →</a>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card attendance">
+      <div class="value">92%</div>
+      <div class="label">Attendance</div>
+    </div>
+    <div class="stat-card assignments">
+      <div class="value">3</div>
+      <div class="label">Due Soon</div>
+    </div>
+    <div class="stat-card gpa">
+      <div class="value">3.78</div>
+      <div class="label">CGPA</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h3>Quick Access</h3>
+    </div>
+    <div class="grid">
+      <a href="#" class="grid-item">
+        <div class="icon notices">📋</div>
+        <span>Notices</span>
+      </a>
+      <a href="#" class="grid-item">
+        <div class="icon classes">📚</div>
+        <span>Classes</span>
+      </a>
+      <a href="my-mycampus-attendance.html" class="grid-item">
+        <div class="icon attendance">✅</div>
+        <span>Attendance</span>
+      </a>
+      <a href="#" class="grid-item">
+        <div class="icon results">🏆</div>
+        <span>Results</span>
+      </a>
+      <a href="#" class="grid-item">
+        <div class="icon assignments">📝</div>
+        <span>Assignments</span>
+      </a>
+      <a href="#" class="grid-item">
+        <div class="icon events">🎉</div>
+        <span>Events</span>
+      </a>
+      <a href="#" class="grid-item">
+        <div class="icon profile">👤</div>
+        <span>Profile</span>
+      </a>
+      <a href="#" class="grid-item">
+        <div class="icon more">⋯</div>
+        <span>More</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h3>Today's Classes</h3>
+      <a href="#">Full routine</a>
+    </div>
+    <div class="schedule-list">
+      <div class="class-row">
+        <div class="time"><div class="t">09:00</div><div class="ampm">AM</div></div>
+        <div class="bar"></div>
+        <div class="info">
+          <p class="course">Data Structures</p>
+          <p class="meta">Room 304 · Dr. Kamal Hasan</p>
+        </div>
+        <div class="status">Now</div>
+      </div>
+      <div class="class-row alt">
+        <div class="time"><div class="t">11:30</div><div class="ampm">AM</div></div>
+        <div class="bar"></div>
+        <div class="info">
+          <p class="course">Database Lab</p>
+          <p class="meta">Lab 2 · Farzana Islam</p>
+        </div>
+      </div>
+      <div class="class-row alt">
+        <div class="time"><div class="t">02:00</div><div class="ampm">PM</div></div>
+        <div class="bar"></div>
+        <div class="info">
+          <p class="course">Software Engineering</p>
+          <p class="meta">Room 210 · Dr. Kamal Hasan</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom">
+    <a href="my-mycampus-dashboard.html" class="active">
+      <div class="nav-icon">🏠</div>
+      Home
+    </a>
+    <a href="#">
+      <div class="nav-icon">💬</div>
+      Messages
+    </a>
+    <a href="my-mycampus-attendance.html">
+      <div class="nav-icon">✅</div>
+      Attendance
+    </a>
+    <a href="#">
+      <div class="nav-icon">👤</div>
+      Profile
+    </a>
+  </nav>
+
+</div>
+
+</body>
+</html>
