@@ -334,7 +334,7 @@
             stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round"/>
         </svg>
         <div class="ring-label">
-          <div class="pct">92%</div>
+          <div class="pct" data-target="92">0%</div>
           <div class="txt">Overall</div>
         </div>
       </div>
@@ -438,6 +438,29 @@
         });
       });
     });
+
+    var pctEl = document.querySelector('.pct[data-target]');
+    if (pctEl) {
+      var target = parseInt(pctEl.getAttribute('data-target'), 10);
+      var duration = 1000;
+      var delay = 200;
+      var start = null;
+
+      var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+
+      var step = function (ts) {
+        if (start === null) start = ts;
+        var elapsed = ts - start;
+        var t = Math.min(1, elapsed / duration);
+        var value = Math.round(ease(t) * target);
+        pctEl.textContent = value + '%';
+        if (t < 1) requestAnimationFrame(step);
+      };
+
+      setTimeout(function () {
+        requestAnimationFrame(step);
+      }, delay);
+    }
   });
 </script>
 

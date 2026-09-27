@@ -581,7 +581,7 @@
                 stroke-dasharray="308" stroke-dashoffset="308" stroke-linecap="round"/>
             </svg>
             <div class="ring-label">
-              <span class="pct">92%</span>
+              <span class="pct" data-target="92">0%</span>
               <span class="lbl">Overall</span>
             </div>
           </div>
@@ -723,6 +723,32 @@
   </nav>
 
 </div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    var el = document.querySelector('.pct[data-target]');
+    if (!el) return;
+    var target = parseInt(el.getAttribute('data-target'), 10);
+    var duration = 1000;
+    var delay = 200;
+    var start = null;
+
+    function ease(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function step(ts) {
+      if (start === null) start = ts;
+      var elapsed = ts - start;
+      var t = Math.min(1, elapsed / duration);
+      var value = Math.round(ease(t) * target);
+      el.textContent = value + '%';
+      if (t < 1) requestAnimationFrame(step);
+    }
+
+    setTimeout(function () {
+      requestAnimationFrame(step);
+    }, delay);
+  });
+</script>
 
 </body>
 </html>
