@@ -4,151 +4,180 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyCampus — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --color-bg: #F6F9F6;
+    --color-bg: #F5F8F4;
     --color-surface: #FFFFFF;
-    --color-text: #10160F;
-    --color-text-muted: #6B756C;
-    --color-border: #E4EAE3;
+    --color-text: #101710;
+    --color-text-muted: #5A6458;
+    --color-border: #E7ECE4;
     --color-accent: #8FE000;
     --color-accent-ink: #2C4A00;
-    --color-accent-soft: #EEFCD4;
-    --chip-blue: #E7F3FF;
-    --chip-blue-ink: #1364C9;
-    --chip-purple: #F3EBFF;
+    --color-accent-soft: #ECFAD1;
+    --color-dark: #12190F;
+    --chip-blue: #E8F2FF;
+    --chip-blue-ink: #1264C7;
+    --chip-purple: #F2EBFF;
     --chip-purple-ink: #7A3FE0;
-    --chip-gold: #FFF4E0;
-    --chip-gold-ink: #B8760A;
+    --chip-gold: #FFF3DE;
+    --chip-gold-ink: #B0740A;
     --chip-pink: #FFEAF1;
     --chip-pink-ink: #C22A6B;
+    --radius-lg: 20px;
     --radius: 16px;
-    --radius-sm: 10px;
-    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --radius-sm: 12px;
+    --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --shadow-card: 0 1px 2px rgba(16,23,16,0.04), 0 12px 24px -16px rgba(16,23,16,0.14);
+    --shadow-float: 0 8px 30px -10px rgba(16,23,16,0.22);
   }
 
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    font-family: var(--font);
+    font-family: var(--font-body);
     background: var(--color-bg);
     color: var(--color-text);
-    line-height: 1.4;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
   }
+
+  svg.icon { display: block; }
 
   .screen {
     max-width: 420px;
     margin: 0 auto;
     min-height: 100vh;
     background: var(--color-bg);
-    padding-bottom: 88px;
+    padding-bottom: 96px;
     position: relative;
   }
 
   header.top {
-    padding: 22px 20px 18px;
+    padding: 26px 22px 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   }
 
   header.top .greeting .hello {
-    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-size: 0.86rem;
+    font-weight: 500;
     color: var(--color-text-muted);
-    margin: 0 0 2px;
+    margin: 0 0 3px;
   }
 
   header.top .greeting .name {
-    font-size: 1.35rem;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
     font-weight: 700;
     margin: 0;
+    letter-spacing: -0.01em;
   }
 
   header.top .icon-btn {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     flex-shrink: 0;
+    color: var(--color-text);
   }
 
   header.top .icon-btn .dot {
     position: absolute;
-    top: 9px;
-    right: 10px;
+    top: 10px;
+    right: 11px;
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: #E0453C;
-    border: 2px solid var(--color-bg);
+    border: 2px solid var(--color-surface);
   }
 
   .section {
-    padding: 0 20px;
-    margin-bottom: 22px;
+    padding: 0 22px;
+    margin-bottom: 24px;
   }
 
   /* Notice banner */
   .notice-card {
-    background: linear-gradient(135deg, #1D2B17, #10160F);
+    background:
+      radial-gradient(120% 140% at 100% 0%, rgba(143,224,0,0.16), transparent 55%),
+      linear-gradient(160deg, #17210F, #0E1409);
     color: #fff;
-    border-radius: var(--radius);
-    padding: 18px;
+    border-radius: var(--radius-lg);
+    padding: 20px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-float);
   }
 
   .notice-card .tag {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(143, 224, 0, 0.18);
+    background: rgba(143, 224, 0, 0.16);
     color: var(--color-accent);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    padding: 4px 10px;
+    padding: 5px 11px 5px 9px;
     border-radius: 999px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
+  .notice-card .tag svg { width: 12px; height: 12px; }
+
   .notice-card h2 {
-    font-size: 1.02rem;
-    font-weight: 600;
-    margin: 0 0 4px;
-    max-width: 85%;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.32;
+    margin: 0 0 6px;
+    max-width: 90%;
+    letter-spacing: -0.005em;
   }
 
   .notice-card p {
     font-size: 0.82rem;
-    color: rgba(255,255,255,0.65);
-    margin: 0 0 14px;
+    color: rgba(255,255,255,0.62);
+    margin: 0 0 16px;
   }
 
   .notice-card .cta {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.82rem;
+    gap: 4px;
+    font-size: 0.83rem;
     font-weight: 600;
     color: var(--color-accent);
     text-decoration: none;
   }
 
+  .notice-card .cta svg { width: 15px; height: 15px; }
+
   /* Quick stats row */
   .stats-row {
     display: flex;
     gap: 10px;
-    margin-top: -14px;
-    padding: 0 20px;
-    margin-bottom: 24px;
+    margin-top: -16px;
+    padding: 0 22px;
+    margin-bottom: 26px;
+    position: relative;
+    z-index: 2;
   }
 
   .stat-card {
@@ -156,22 +185,25 @@
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    padding: 12px 10px;
+    padding: 13px 8px;
     text-align: center;
-    box-shadow: 0 8px 20px -14px rgba(16, 22, 15, 0.25);
+    box-shadow: var(--shadow-card);
   }
 
   .stat-card .value {
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
     margin-bottom: 2px;
+    letter-spacing: -0.01em;
   }
 
   .stat-card .label {
-    font-size: 0.75rem;
+    font-size: 0.68rem;
+    font-weight: 600;
     color: var(--color-text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
   }
 
   .stat-card.attendance .value { color: var(--color-accent-ink); }
@@ -181,94 +213,108 @@
   .section-head {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 12px;
+    align-items: center;
+    margin-bottom: 14px;
   }
 
   .section-head h3 {
-    font-size: 0.95rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
     font-weight: 700;
     margin: 0;
+    letter-spacing: -0.005em;
   }
 
   .section-head a {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
     font-size: 0.78rem;
     color: var(--color-text-muted);
     text-decoration: none;
     font-weight: 600;
   }
 
+  .section-head a svg { width: 14px; height: 14px; }
+
   /* Quick access grid */
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 12px 8px;
   }
 
   .grid-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
     text-decoration: none;
     color: var(--color-text);
   }
 
   .grid-item .icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
+    transition: transform 0.15s ease;
   }
+
+  .grid-item .icon svg { width: 22px; height: 22px; }
 
   .grid-item span {
-    font-size: 0.75rem;
+    font-size: 0.74rem;
     font-weight: 600;
     text-align: center;
+    color: var(--color-text);
   }
 
-  .icon.notices { background: var(--color-accent-soft); }
-  .icon.classes { background: var(--chip-blue); }
-  .icon.attendance { background: var(--chip-purple); }
-  .icon.results { background: var(--chip-gold); }
-  .icon.assignments { background: var(--chip-pink); }
-  .icon.events { background: var(--color-accent-soft); }
-  .icon.profile { background: var(--chip-blue); }
-  .icon.more { background: #F0F1EF; }
+  .icon.notices { background: var(--color-accent-soft); color: var(--color-accent-ink); }
+  .icon.classes { background: var(--chip-blue); color: var(--chip-blue-ink); }
+  .icon.attendance { background: var(--chip-purple); color: var(--chip-purple-ink); }
+  .icon.results { background: var(--chip-gold); color: var(--chip-gold-ink); }
+  .icon.assignments { background: var(--chip-pink); color: var(--chip-pink-ink); }
+  .icon.events { background: var(--color-accent-soft); color: var(--color-accent-ink); }
+  .icon.profile { background: var(--chip-blue); color: var(--chip-blue-ink); }
+  .icon.more { background: #EEF0EC; color: var(--color-text-muted); }
 
   /* Today schedule */
   .schedule-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 9px;
   }
 
   .class-row {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 13px;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    padding: 12px;
+    padding: 13px;
+    box-shadow: var(--shadow-card);
   }
 
   .class-row .time {
     text-align: center;
-    min-width: 46px;
+    min-width: 44px;
   }
 
   .class-row .time .t {
-    font-size: 0.78rem;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
     font-weight: 700;
   }
 
   .class-row .time .ampm {
-    font-size: 0.75rem;
+    font-size: 0.66rem;
+    font-weight: 600;
     color: var(--color-text-muted);
+    letter-spacing: 0.03em;
   }
 
   .class-row .bar {
@@ -278,14 +324,15 @@
     background: var(--color-accent);
   }
 
-  .class-row.alt .bar { background: var(--chip-blue-ink); }
+  .class-row.alt .bar { background: var(--chip-blue-ink); opacity: 0.55; }
 
   .class-row .info {
     flex: 1;
+    min-width: 0;
   }
 
   .class-row .info .course {
-    font-size: 0.85rem;
+    font-size: 0.87rem;
     font-weight: 700;
     margin: 0 0 2px;
   }
@@ -293,15 +340,19 @@
   .class-row .info .meta {
     font-size: 0.75rem;
     color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .class-row .status {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    padding: 4px 8px;
+    padding: 5px 10px;
     border-radius: 999px;
     background: var(--color-accent-soft);
     color: var(--color-accent-ink);
+    flex-shrink: 0;
   }
 
   /* Bottom nav */
@@ -312,27 +363,26 @@
     transform: translateX(-50%);
     width: 100%;
     max-width: 420px;
-    background: var(--color-surface);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(14px);
     border-top: 1px solid var(--color-border);
     display: flex;
     justify-content: space-around;
-    padding: 10px 0 14px;
+    padding: 12px 0 16px;
   }
 
   nav.bottom a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
     text-decoration: none;
     color: var(--color-text-muted);
-    font-size: 0.75rem;
+    font-size: 0.68rem;
     font-weight: 600;
   }
 
-  nav.bottom a.active {
-    color: var(--color-accent-ink);
-  }
+  nav.bottom a.active { color: var(--color-accent-ink); }
 
   nav.bottom .nav-icon {
     width: 22px;
@@ -340,8 +390,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.05rem;
   }
+
+  nav.bottom .nav-icon svg { width: 21px; height: 21px; }
 </style>
 </head>
 <body>
@@ -351,17 +402,26 @@
   <header class="top">
     <div class="greeting">
       <p class="hello">Good morning,</p>
-      <p class="name">Rafi Ahmed 👋</p>
+      <p class="name">Rafi Ahmed</p>
     </div>
-    <div class="icon-btn">🔔<span class="dot"></span></div>
+    <div class="icon-btn">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><path d="M12 3a5 5 0 0 0-5 5v3.3c0 .6-.2 1.2-.6 1.7L5 15h14l-1.4-2c-.4-.5-.6-1.1-.6-1.7V8a5 5 0 0 0-5-5Z"/><path d="M9.5 18a2.5 2.5 0 0 0 5 0"/></svg>
+      <span class="dot"></span>
+    </div>
   </header>
 
   <div class="section" style="margin-bottom: 0;">
     <div class="notice-card">
-      <span class="tag">📌 New Notice</span>
+      <span class="tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10Z"/><circle cx="12" cy="11" r="2"/></svg>
+        New Notice
+      </span>
       <h2>Mid-term routine has been published for CSE 3rd Year</h2>
       <p>Posted 2 hours ago by Exam Controller</p>
-      <a href="#" class="cta">Read full notice →</a>
+      <a href="#" class="cta">
+        Read full notice
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 
@@ -386,35 +446,51 @@
     </div>
     <div class="grid">
       <a href="#" class="grid-item">
-        <div class="icon notices">📋</div>
+        <div class="icon notices">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 4V3.5A1.5 1.5 0 0 1 10.5 2h3A1.5 1.5 0 0 1 15 3.5V4"/><path d="M9 10.5h6M9 14h6M9 17.5h3"/></svg>
+        </div>
         <span>Notices</span>
       </a>
       <a href="#" class="grid-item">
-        <div class="icon classes">📚</div>
+        <div class="icon classes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.8c1.5-.9 3.6-1.3 5.4-1 1 .16 1.7.5 2.2 1v12.7c-.5-.5-1.2-.84-2.2-1-1.8-.3-3.9.1-5.4.9V5.8Z"/><path d="M20 5.8c-1.5-.9-3.6-1.3-5.4-1-1 .16-1.7.5-2.2 1v12.7c.5-.5 1.2-.84 2.2-1 1.8-.3 3.9.1 5.4.9V5.8Z"/></svg>
+        </div>
         <span>Classes</span>
       </a>
       <a href="my-mycampus-attendance.html" class="grid-item">
-        <div class="icon attendance">✅</div>
+        <div class="icon attendance">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.3"/><path d="M8.3 12.2l2.4 2.4 5-5.2"/></svg>
+        </div>
         <span>Attendance</span>
       </a>
       <a href="#" class="grid-item">
-        <div class="icon results">🏆</div>
+        <div class="icon results">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v3a5 5 0 0 1-10 0V4Z"/><path d="M7 5H4.5A2.5 2.5 0 0 0 7 7.8"/><path d="M17 5h2.5A2.5 2.5 0 0 1 17 7.8"/><line x1="12" y1="11.5" x2="12" y2="15.3"/><path d="M9.3 19h5.4"/><path d="M9.9 15.3h4.2l.6 3.7H9.3l.6-3.7Z"/></svg>
+        </div>
         <span>Results</span>
       </a>
       <a href="#" class="grid-item">
-        <div class="icon assignments">📝</div>
+        <div class="icon assignments">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4.2 1L4 15.8 16.5 3.5Z"/></svg>
+        </div>
         <span>Assignments</span>
       </a>
       <a href="#" class="grid-item">
-        <div class="icon events">🎉</div>
+        <div class="icon events">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14.5" rx="2.2"/><path d="M4 9.7h16"/><path d="M8 3.3v4"/><path d="M16 3.3v4"/><circle cx="9" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </div>
         <span>Events</span>
       </a>
       <a href="#" class="grid-item">
-        <div class="icon profile">👤</div>
+        <div class="icon profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.2" r="3.6"/><path d="M5 19.5c1.2-3.6 3.9-5.6 7-5.6s5.8 2 7 5.6"/></svg>
+        </div>
         <span>Profile</span>
       </a>
       <a href="#" class="grid-item">
-        <div class="icon more">⋯</div>
+        <div class="icon more">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+        </div>
         <span>More</span>
       </a>
     </div>
@@ -423,7 +499,10 @@
   <div class="section">
     <div class="section-head">
       <h3>Today's Classes</h3>
-      <a href="#">Full routine</a>
+      <a href="#">
+        Full routine
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
     </div>
     <div class="schedule-list">
       <div class="class-row">
@@ -456,19 +535,19 @@
 
   <nav class="bottom">
     <a href="my-mycampus-dashboard.html" class="active">
-      <div class="nav-icon">🏠</div>
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.3 12 4l8 7.3"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9"/></svg></div>
       Home
     </a>
     <a href="#">
-      <div class="nav-icon">💬</div>
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.8 7.3L4 20l1.2-4.3A8.5 8.5 0 1 1 21 11.5Z"/></svg></div>
       Messages
     </a>
     <a href="my-mycampus-attendance.html">
-      <div class="nav-icon">✅</div>
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.3"/><path d="M8.3 12.2l2.4 2.4 5-5.2"/></svg></div>
       Attendance
     </a>
     <a href="#">
-      <div class="nav-icon">👤</div>
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.2" r="3.6"/><path d="M5 19.5c1.2-3.6 3.9-5.6 7-5.6s5.8 2 7 5.6"/></svg></div>
       Profile
     </a>
   </nav>
